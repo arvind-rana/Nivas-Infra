@@ -4,6 +4,7 @@
 *{
   font-family:Outfit;
 }
-html {
+html,body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }

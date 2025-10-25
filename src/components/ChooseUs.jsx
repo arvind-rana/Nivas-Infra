@@ -1,10 +1,10 @@
-import React from 'react'
-import {motion} from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 import { FaCertificate, FaHandshake, FaGem, FaUsers, FaChartLine, FaPeopleGroup } from "react-icons/fa6";
 
 const ChooseUs = () => {
 
-    const features = [
+  const features = [
     {
       icon: <FaCertificate className="text-4xl text-[#1E3A8A]" />,
       title: "Certified RERA, Trusted Real Estate Partners",
@@ -38,7 +38,6 @@ const ChooseUs = () => {
   ];
 
   return (
-    
     <motion.section
       id="ChooseUs"
       initial={{ opacity: 0, y: 80 }}
@@ -48,7 +47,7 @@ const ChooseUs = () => {
       className="bg-[#F9FAFB] py-16 px-6 md:px-16 lg:px-28 text-center"
     >
       <h1 className='text-2xl sm:text-4xl font-bold mb-2 text-center'>
-        WHY <span className='underline underline-offset-4 decoration-1 under font-light'>CHOOSE US!</span>
+        WHY <span className='underline underline-offset-4 decoration-1 font-light'>CHOOSE US!</span>
       </h1>
       <p className='text-center text-gray-500 mb-12 max-w-80 mx-auto'>"Your Lifestyle, Our Expertise"</p>
 
@@ -60,8 +59,8 @@ const ChooseUs = () => {
             className="bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl p-8 text-center border border-gray-100"
           >
             <div className="flex justify-center mb-4">{item.icon}</div>
-            <h4 className="text-xl font-semibold mb-3 text-gray-800">{item.title}</h4>
-            <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
+            <h4 className="text-xl md:text-2xl font-semibold mb-3 text-gray-800">{item.title}</h4>
+            <p className="text-sm md:text-base lg:text-base text-gray-600 leading-relaxed">{item.desc}</p>
           </motion.div>
         ))}
       </div>
@@ -69,4 +68,4 @@ const ChooseUs = () => {
   )
 }
 
-export default ChooseUs
+export default ChooseUs;
