@@ -13,7 +13,7 @@ const AboutUs = () => {
       <div className="absolute inset-0 bg-black/40 z-10"></div>
 
       {/* Text Content */}
-      <div className="relative z-20 px-6 sm:px-12 md:px-16 lg:px-24">
+      <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-10 w-full">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
           About Us
         </h1>

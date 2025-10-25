@@ -3,6 +3,9 @@ import React, { Suspense, lazy } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import ScrollToTop from "./components/scrollToTop";
+
+
 // Lazy load pages and components
 const Header = lazy(() => import("./components/Header"));
 const About = lazy(() => import("./components/About"));
@@ -21,7 +24,9 @@ const Aboutfooter = lazy(() => import("./pages/Aboutfooter"));
 const App = () => {
   return (
     <Router>
-      <ToastContainer />
+      <div className='overflow-x-hidden'>
+        <ToastContainer />
+        <ScrollToTop/>
       <Suspense
         fallback={
           <div className="text-center mt-20 text-lg font-semibold">
@@ -61,6 +66,7 @@ const App = () => {
           />
         </Routes>
       </Suspense>
+      </div>
     </Router>
   );
 };
