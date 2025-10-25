@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const navigate = useNavigate();
 
-  // Prevent scrolling when mobile menu is open
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = showMobileMenu ? "hidden" : "auto";
     return () => {
@@ -12,22 +14,13 @@ const Navbar = () => {
     };
   }, [showMobileMenu]);
 
-  // Smooth scroll to section
   const handleScroll = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) section.scrollIntoView({ behavior: "smooth" });
+    navigate("/"); // go to home page first
+    setTimeout(() => {
+      const section = document.getElementById(sectionId);
+      if (section) section.scrollIntoView({ behavior: "smooth" });
+    }, 50);
   };
-
-  const navItems = [
-    { name: "Home", section: "Header" },
-    { name: "About", section: "About" },
-    { name: "Properties", section: "Projects" },
-    { name: "Testimonials", section: "Testimonials" },
-    {
-      name: "Contact Us",
-      link: "https://docs.google.com/forms/d/e/1FAIpQLSePSRx7_OvqGvy3aVZN4h8iTMVc75oHjws_DBNbA_YIcKJUOg/viewform?usp=dialog",
-    },
-  ];
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-md border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)]">
@@ -41,27 +34,43 @@ const Navbar = () => {
         />
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex absolute left-1/2 -translate-x-1/2 gap-6 sm:gap-8 lg:gap-10 text-white text-base sm:text-lg lg:text-xl font-medium">
-          {navItems.slice(0, 4).map((item) => (
-            <li
-              key={item.name}
-              onClick={() => handleScroll(item.section)}
-              className="hover:text-gray-400 transition cursor-pointer"
-            >
-              {item.name.toUpperCase()}
-            </li>
-          ))}
+        <ul className="cursor-pointer hidden md:flex absolute left-1/2 -translate-x-1/2 gap-6 sm:gap-8 lg:gap-10 text-white text-base sm:text-lg lg:text-xl font-medium">
+          <li
+            onClick={() => handleScroll("Header")}
+            className="hover:text-gray-400 transition"
+          >
+            HOME
+          </li>
+          <li
+            onClick={() => handleScroll("About")}
+            className="hover:text-gray-400 transition"
+          >
+            ABOUT
+          </li>
+          <li
+            onClick={() => handleScroll("Projects")}
+            className="hover:text-gray-400 transition"
+          >
+            PROPERTIES
+          </li>
+          <li
+            onClick={() => handleScroll("Testimonials")}
+            className="hover:text-gray-400 transition"
+          >
+            TESTIMONIALS
+          </li>
         </ul>
 
         {/* Contact Button */}
         <a
-          href={navItems[4].link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-block bg-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-black font-semibold shadow-md hover:bg-gray-200 transition"
-        >
-          CONTACT US
-        </a>
+  href="https://docs.google.com/forms/d/e/1FAIpQLSePSRx7_OvqGvy3aVZN4h8iTMVc75oHjws_DBNbA_YIcKJUOg/viewform?usp=dialog"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="hidden md:inline-block bg-white px-6 sm:px-8 py-2 sm:py-3 rounded-full text-black font-semibold shadow-md hover:bg-gray-200 transition text-center"
+>
+  CONTACT US
+</a>
+
 
         {/* Mobile Menu Icon */}
         <img
@@ -89,21 +98,41 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Items */}
+
         <ul className="flex flex-col items-center gap-6 mt-10 text-black text-base sm:text-lg font-medium px-4">
-          {navItems.map((item, index) => (
+          {[
+            { name: "Home", section: "Header" },
+            { name: "About", section: "About" },
+            { name: "Properties", section: "Projects" },
+            { name: "Testimonials", section: "Testimonials" },
+            {
+              name: "Contact Us",
+              link: "https://docs.google.com/forms/d/e/1FAIpQLSePSRx7_OvqGvy3aVZN4h8iTMVc75oHjws_DBNbA_YIcKJUOg/viewform?usp=dialog",
+            },
+          ].map((item, index) => (
             <li
               key={index}
               className="px-6 py-3 w-full text-center hover:bg-gray-100 rounded-lg cursor-pointer transition"
-              onClick={() => {
-                if (item.link) {
-                  window.open(item.link, "_blank");
-                } else {
-                  handleScroll(item.section);
-                }
-                setShowMobileMenu(false);
-              }}
             >
-              {item.name}
+              {item.link ? (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setShowMobileMenu(false)}
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <span
+                  onClick={() => {
+                    handleScroll(item.section);
+                    setShowMobileMenu(false);
+                  }}
+                >
+                  {item.name}
+                </span>
+              )}
             </li>
           ))}
         </ul>
@@ -112,4 +141,4 @@ const Navbar = () => {
   );
 };
 
-export default React.memo(Navbar);
+export default Navbar;
