@@ -4,8 +4,7 @@ import { toast } from 'react-toastify';
 import {motion} from 'framer-motion'
 const Contact = () => {
 
-  const [result, setResult] = useState("");
-
+     const [result, setResult] = React.useState("");
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -65,7 +64,7 @@ const Contact = () => {
             Message 
             <textarea className='w-full border border-gray-300 rounded py-3 px-4 mt-2 h-48 resize-none' name='Message' placeholder='Message' required></textarea>
         </div>
-        <button type="submit" className='bg-blue-600 text-white py-2 px-12 mb-10 rounded'>{result? result:"Send message"}</button>
+        <button type='submit' className='bg-blue-600 text-white py-2 px-12 mb-10 rounded'>{result? result:"Send message"}</button>
       </form>
 
     </motion.div>
